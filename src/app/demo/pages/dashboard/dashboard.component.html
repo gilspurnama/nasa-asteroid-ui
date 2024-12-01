@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-xl-12">
+    <app-card cardTitle="Near-Earth Object Data Table (Nearest 10)" cardClass="Neo-Data" blockClass="p-0">
+      <div class="table-responsive" (click)="redirect()">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>ID - Name</th>
+              <th>Reference ID</th>
+              <th>Potentially Hazardous</th>
+              <th>Approach Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (neo of neoData; track neo) {
+              <tr class="unread">
+                <td>
+                  <h6 class="mb-1">{{ neo.id }} - {{ neo.name }}</h6>
+                </td>
+                <td>
+                  <h6 class="text-muted">
+                    {{ neo.neo_reference_id }}
+                  </h6>
+                </td>
+                <td>
+                  @if (neo.is_potentially_hazardous_asteroid) {
+                    <span class="badge m-r-5 bg-danger">Danger</span>
+                  }
+                  @else {
+                    <span class="badge m-r-5 bg-success">Safe</span>
+                  }
+                </td>
+                <td>
+                  <h6 class="mb-1">{{ neo.close_approach_data[0].close_approach_date_full }}</h6>
+                </td>
+                <!-- <td>
+                  <a href="javascript:" class="label theme-bg2 text-white f-12 rounded-pill">Reject</a>
+                  <a href="javascript:" class="label theme-bg text-white f-12 rounded-pill">Approve</a>
+                </td> -->
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>

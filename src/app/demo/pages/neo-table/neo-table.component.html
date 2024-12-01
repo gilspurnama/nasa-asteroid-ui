@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-xl-12">
+    <app-card cardTitle="Near-Earth Object Data Table">
+      <div ngbAccordion #accordion="ngbAccordion" *ngFor="let neo of neoData">
+        <div ngbAccordionItem="accordionItemId">
+          <h2 ngbAccordionHeader>
+            <button ngbAccordionButton>{{ neo.name }} - {{ neo.id }} </button>
+          </h2>
+          <div ngbAccordionCollapse>
+            <div ngbAccordionBody>
+              <ng-template>
+                <div class="row">
+                  <div class="col-md-3">
+                    <br>
+                    Reference ID : {{ neo.neo_reference_id }}
+                    <br>
+                    Potentially Hazardous :
+                    <span [ngClass]="neo.is_potentially_hazardous_asteroid ? 'badge m-r-5 bg-danger' : 'badge m-r-5 bg-success'">{{neo.is_potentially_hazardous_asteroid}}</span>
+                    <br>
+                  </div>
+                  <div class="col-md-3">
+                    <br>
+                    Estimated Diameter :
+                    <br>
+                    kilometers (min - max)  : {{neo.estimated_diameter.kilometers.estimated_diameter_min}} - {{neo.estimated_diameter.kilometers.estimated_diameter_max}}
+                    <br>
+                    meters (min - max)      : {{neo.estimated_diameter.meters.estimated_diameter_min}} - {{neo.estimated_diameter.meters.estimated_diameter_max}}
+                    <br>
+                    miles (min - max)       : {{neo.estimated_diameter.miles.estimated_diameter_min}} - {{neo.estimated_diameter.miles.estimated_diameter_max}}
+                    <br>
+                    feet (min - max)        : {{neo.estimated_diameter.feet.estimated_diameter_min}} - {{neo.estimated_diameter.feet.estimated_diameter_max}}
+                  </div>
+                  <div class="col-md-3">
+                    <br>
+                    Orbiting : {{ neo.close_approach_data[0].orbiting_body }}
+                    <br>
+                    Miss Distance : {{ neo.close_approach_data[0].miss_distance.kilometers }} km
+                    <br>
+                    Is Sentry Object : 
+                    <span [ngClass]="neo.is_sentry_object ? 'badge m-r-5 bg-danger' : 'badge m-r-5 bg-success'">{{neo.is_sentry_object}}</span>
+                  </div>
+                  <div class="col-md-3">
+                    <br>
+                    Relative Velocity
+                    <br>
+                    km / sec : {{ neo.close_approach_data[0].relative_velocity.kilometers_per_second }}
+                    <br>
+                    km / hour : {{ neo.close_approach_data[0].relative_velocity.kilometers_per_hour }}
+                    <br>
+                    miles / sec : {{ neo.close_approach_data[0].relative_velocity.miles_per_second || "null"}}
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <!-- <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>ID - Name</th>
+              <th>Reference ID</th>
+              <th>Potentially Hazardous</th>
+              <th>Approach Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (neo of neoData; track neo) {
+              <tr>
+                <td>
+                  <h6 class="mb-1">{{ neo.id }} - {{ neo.name }}</h6>
+                </td>
+                <td>
+                  <h6 class="text-muted">
+                    {{ neo.neo_reference_id }}
+                  </h6>
+                </td>
+                <td>
+                  @if (neo.is_potentially_hazardous_asteroid) {
+                    <span class="badge m-r-5 bg-danger">Danger</span>
+                  }
+                  @else {
+                    <span class="badge m-r-5 bg-success">Safe</span>
+                  }
+                </td>
+                <td>
+                  <h6 class="mb-1">{{ neo.close_approach_data[0].close_approach_date_full }}</h6>
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info" (click)="toggleInfo()">Info</button>
+                </td>
+                  <!-- <div ngbAccordionCollapse>
+                    <div ngbAccordionBody>
+                      <ng-template>
+                        {{ neo.id }}
+                      </ng-template>
+                    </div>
+                  </div> -->
+              <!-- </tr> -->
+              <!-- @if (neo.toggleInfo) { -->
+                <!-- <tr> -->
+                  <!-- <td>
+                    {{ neo.id }}
+                  </td>
+                </tr> -->
+              <!-- } -->
+              <!-- <tr class="unread" ngbAccordion #accordion="ngbAccordion" ngbAccordionItem="{{neo.id}}">
+                <td>
+                  <h6 class="mb-1">{{ neo.id }} - {{ neo.name }}</h6>
+                </td>
+                <td>
+                  <h6 class="text-muted">
+                    {{ neo.neo_reference_id }}
+                  </h6>
+                </td>
+                <td>
+                  @if (neo.is_potentially_hazardous_asteroid) {
+                    <span class="badge m-r-5 bg-danger">Danger</span>
+                  }
+                  @else {
+                    <span class="badge m-r-5 bg-success">Safe</span>
+                  }
+                </td>
+                <td>
+                  <h6 class="mb-1">{{ neo.close_approach_data[0].close_approach_date_full }}</h6>
+                </td>
+                <button ngbAccordionButton>First panel</button>
+                <!-- <td>
+                  <a href="javascript:" class="label theme-bg2 text-white f-12 rounded-pill">Reject</a>
+                  <a href="javascript:" class="label theme-bg text-white f-12 rounded-pill">Approve</a>
+                </td> -->
+              <!-- </tr> -->
+            <!-- }
+          </tbody>
+        </table> --> 
+      </div>
+    </app-card>
+  </div>
